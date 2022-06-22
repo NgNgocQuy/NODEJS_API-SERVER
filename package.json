@@ -1,0 +1,41 @@
+{
+  "name": "api-server",
+  "version": "1.0.0",
+  "description": "construct api server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "startAuth": "nodemon --inspect ./authServer/index.js",
+    "startApp": "nodemon --inspect ./appServer/index.js",
+    "dev": "concurrently --kill-others \"npm run startAuth\" \"npm run startApp\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NgNgocQuy/NODEJS_API-SERVER.git"
+  },
+  "keywords": [
+    "API-SERver"
+  ],
+  "author": "quys",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NgNgocQuy/NODEJS_API-SERVER/issues"
+  },
+  "homepage": "https://github.com/NgNgocQuy/NODEJS_API-SERVER#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.8",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "nodemon": "^2.0.16"
+  }
+}
