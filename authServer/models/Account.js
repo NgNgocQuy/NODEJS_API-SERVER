@@ -7,5 +7,8 @@ const accountSchema = new Schema({
     password: String,
     sessionKey: String,
     permission: String,
+    token:{
+        refreshToken:String,
+    },
 })
 export default mongoose.model("accounts", accountSchema)

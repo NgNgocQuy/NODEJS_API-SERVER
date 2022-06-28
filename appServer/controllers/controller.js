@@ -37,10 +37,17 @@ const productGet = async (req,res)=>{
             res.json(error)
         }
     res.sendStatus(403)
-    }
+}
+
+const loginPage = async(req,res,next)=>{
+
+    res.render("loginPage")
+}
     
 
 export {
     authenToken,
     productGet,
+
+    loginPage,
 }
