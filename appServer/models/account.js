@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 const {Schema} = mongoose 
 
 
@@ -11,4 +11,4 @@ const accountSchema = new Schema({
         refreshToken:String,
     },
 })
- module.exports =  mongoose.model("accounts", accountSchema)
+export default mongoose.model("accounts", accountSchema)

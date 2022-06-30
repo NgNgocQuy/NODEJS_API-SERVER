@@ -4,6 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv'
 
 import product from '../models/products.js'
+import accounts from '../models/Account.js'
 
 dotenv.config()
 
@@ -21,22 +22,34 @@ const authenToken= async (req,res,next)=>{
             }
             next()
         }else{
-            res.sendStatus(401)
+            req.auth= {permission:-1}
+            next()
         }
 
     }
 
 const productGet = async (req,res)=>{
     console.log(req.auth);
-    if(req.auth.permission)
-        try {
-            let result = await product.find().exec()
-            res.json(result)
-        } catch (error) {
-            console.log(error);
-            res.json(error)
-        }
+    try {
+        if(req.auth.permission>0)
+            res.json(await product.find().exec())
+            
+    } catch (error) {
+        let result = await product.find().limit(2).exec()
+        res.json({permission:'you not login',result})
+    }
     res.sendStatus(403)
+
+}
+
+const userGet = async (req,res)=>{
+    let result
+    result ={
+        account: await accounts.findOne({_id:req.auth.userId}).exec(),
+        permission:req.auth.userId
+        }
+
+    res.json(result)
 }
 
 const loginPage = async(req,res,next)=>{
@@ -48,6 +61,7 @@ const loginPage = async(req,res,next)=>{
 export {
     authenToken,
     productGet,
-
+    userGet,
     loginPage,
+
 }
